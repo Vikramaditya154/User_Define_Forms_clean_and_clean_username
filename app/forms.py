@@ -1,5 +1,7 @@
 from django import forms
 
+from django.core import validators
+
 def call_error(Svalue):
     if Svalue[0].lower()=='a':
         raise forms.ValidationError("First letter should not be a")
@@ -14,7 +16,7 @@ class StudentForm(forms.Form):
     email=forms.EmailField()
     Re_email=forms.EmailField()
     url=forms.URLField()
-
+    mobile_no=forms.CharField(validators=[validators.RegexValidator('[6-9]\d{9}')])
     botcatcher=forms.CharField(max_length=100,widget=forms.HiddenInput,required=False)
 
     def clean(self):
